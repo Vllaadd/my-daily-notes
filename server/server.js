@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-// const Notes = require('./models/Notes');
+const Notes = require('./models/Notes');
 
 //MIDDLEWARE
 const app = express();
@@ -14,6 +14,25 @@ mongoose.connect('mongodb+srv://vladzizic:IWKhFXpvCEkmaAWt@cluster0.7jw4ap3.mong
 })
 .then(() => console.log('Connected to DB'))
 .catch(console.error);
+
+//ROUTES
+app.post('/api/notes', async(req, res)=>{
+    const { tags, note } = req.body;
+
+    try{
+        const newNote = new Notes({
+            tags,
+            note,
+        });
+
+        await newNote.save();
+
+        res.status(201).json({message: 'Note saved successfully'});
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: 'Intenral Server Error'});
+    }
+})
 
 
 app.listen(3000, () => console.log('Server started on port 3000'));
