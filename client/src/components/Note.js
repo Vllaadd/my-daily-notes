@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const Note = ({ addNote }) => {
     const [tags, setTags] = useState('');
@@ -21,6 +21,14 @@ const Note = ({ addNote }) => {
             <input
             type='text'
             id='tagInput'
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            />
+            <br />
+
+            <label htmlFor='noteInput'>Note:</label>
+            <textarea
+            id='noteInput'
             value={note}
             onChange={(e) => setNote(e.target.value)}
             />
