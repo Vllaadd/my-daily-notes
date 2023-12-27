@@ -28,7 +28,7 @@ const Note = ({ addNote }) => {
 
     return (
         <div>
-            <label htmlFor='tagInput'>Tags</label>
+            <label htmlFor='tagInput'>Tag:</label>
             <input
                 type='text'
                 id='tagInput'
