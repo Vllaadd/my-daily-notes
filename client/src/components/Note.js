@@ -4,16 +4,22 @@ const Note = ({ addNote }) => {
     const [tags, setTags] = useState('');
     const [note, setNote] = useState('');
 
-    const handleAddNote = () => {
-        const tagArray = tags.split(' ').filter(tag => tag != '');
-
-        addNote({
-            tags: tagArray,
-            note,
-        });
+    const handleTagsChange = (e) => {
+        setTags(e.target.value);
+      };
+    
+      const handleNoteChange = (e) => {
+        setNote(e.target.value);
+      };
+    
+      const handleAddNote = () => {
+        // Process the tags and note data as needed
+        // ...
+    
+        // Reset the input fields
         setTags('');
         setNote('');
-    };
+      };
 
     return(
         <div>
@@ -21,8 +27,8 @@ const Note = ({ addNote }) => {
             <input
             type='text'
             id='tagInput'
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
+            value={tags}
+            onChange={handleTagsChange}
             />
             <br />
 
@@ -30,7 +36,7 @@ const Note = ({ addNote }) => {
             <textarea
             id='noteInput'
             value={note}
-            onChange={(e) => setNote(e.target.value)}
+            onChange={handleNoteChange}
             />
             <br />
 
