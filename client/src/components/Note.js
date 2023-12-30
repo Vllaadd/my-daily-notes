@@ -14,17 +14,32 @@ const Note = ({ addNote }) => {
         setNote(e.target.value);
     };
 
-    const handleAddNote = () => {
+    const handleAddNote = async () => {
         const tagArray = tags.split(' ').filter(tag => tag != '');
-        // saveNoteToMongoDB({
-        //     tags: tagArray,
-        //     note,
-        // });
-
-        setDisplayedNotes([...displayedNotes, { tags: tagArray, note }]);
+    try{
+        await axios.post('/newnote', {tags:tagArray, note});
+        fetchAllNotes();
+    }catch(error){
+        console.error('Error adding note:', error);
+    }
 
         setTags('');
         setNote('');
+    const fetchAllNotes = async () => {
+        try{
+            const response = await axios.get('/home');
+            const allNotes = response.data;
+
+            setDisplayedNotes(allNotes);
+        }catch(error){
+            console.error('Error fetching notes:', error)
+        }
+    };
+
+    useEffect(() => {
+        fetchAllNotes();
+    }, []);
+
     };
 
     return (
