@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Note = ({ addNote }) => {
+const Note = () => {
     const [tags, setTags] = useState('');
     const [note, setNote] = useState('');
     const [displayedNotes, setDisplayedNotes] = useState([]);
@@ -25,6 +25,8 @@ const Note = ({ addNote }) => {
 
         setTags('');
         setNote('');
+
+};
     const fetchAllNotes = async () => {
         try{
             const response = await axios.get('/home');
@@ -33,14 +35,12 @@ const Note = ({ addNote }) => {
             setDisplayedNotes(allNotes);
         }catch(error){
             console.error('Error fetching notes:', error)
-        }
+        };
     };
 
     useEffect(() => {
         fetchAllNotes();
     }, []);
-
-    };
 
     return (
         <div>
@@ -73,7 +73,7 @@ const Note = ({ addNote }) => {
                 </ul>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Note;

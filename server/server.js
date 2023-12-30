@@ -16,7 +16,7 @@ mongoose.connect('mongodb+srv://vladzizic:IWKhFXpvCEkmaAWt@cluster0.7jw4ap3.mong
 .catch(console.error);
 
 //ROUTES
-app.get)('/home', async(req, res) => {
+app.get('/home', async(req, res) => {
     try{
         const allNotes = await Notes.find();
         res.status(200).json(allNotes);
