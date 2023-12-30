@@ -16,9 +16,18 @@ mongoose.connect('mongodb+srv://vladzizic:IWKhFXpvCEkmaAWt@cluster0.7jw4ap3.mong
 .catch(console.error);
 
 //ROUTES
-app.post('/api/notes', async(req, res)=>{
-    const { tags, note } = req.body;
+app.get)('/home', async(req, res) => {
+    try{
+        const allNotes = await Notes.find();
+        res.status(200).json(allNotes);
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error'});
+    }
+});
 
+app.post('/newnote', async(req, res)=>{
+    const { tags, note } = req.body;
     try{
         const newNote = new Notes({
             tags,
@@ -35,4 +44,4 @@ app.post('/api/notes', async(req, res)=>{
 })
 
 
-app.listen(3000, () => console.log('Server started on port 3000'));
+app.listen(3001, () => console.log('Server started on port 3001'));
